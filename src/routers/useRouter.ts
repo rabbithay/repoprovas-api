@@ -1,12 +1,22 @@
 import { Router } from 'express';
-import * as exampleControllers from '../controllers/example'
+import * as subjectsController from '@/controllers/subjects'
 
 const router = Router();
 
-router.get('/example', () => {});
+router.get('/health', (req, res) => {
+    res.status(200).send("OK!")
+});
 
-router.put('/example', () => {});
+router.post('/exams', () => {});
 
-router.post('/example', () => {});
+router.get('/exams', () => {});
+
+router.get('/subjects', subjectsController.getSubjects);
+
+router.get('/subjects/:id', () => {});
+
+router.get('/teachers', () => {});
+
+router.get('/teachers/:id', () => {});
 
 export default router;
