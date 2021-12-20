@@ -1,13 +1,12 @@
 import { getRepository } from "typeorm";
 import Subject from '@/entities/Subject'
 
-export async function getSubjects() {
-  const subjects = await getRepository(Subject).find({relations:["teachers", "exams"]});
+export async function getSubjectsAndTeachers() {
+  const subjects = await getRepository(Subject).find({relations:["teachers"]});
   return subjects;
 }
 
-
-export async function getSubjectById(subjectId: number){
-  const subject = await getRepository(Subject).find({ id: subjectId });
-  return subject;
+export async function getSubjectsAndExams(){
+  const subjects = await getRepository(Subject).createQueryBuilder("subjects").innerJoinAndSelect("subjects.exams", "exams").innerJoinAndSelect("exams.teacher", "teacher").getMany() 
+  return subjects;
 }
