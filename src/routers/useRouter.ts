@@ -13,12 +13,12 @@ router.post('/exams', examsController.postExam);
 
 router.get('/exams', examsController.getExams);
 
-router.get('/subjects', subjectsController.getSubjects);
+router.get('/subjects/teachers', subjectsController.getSubjectsAndTeachers);
 
-router.get('/subjects/:id', subjectsController.getSubjectById);
+router.get('/subjects/exams', subjectsController.getSubjectsAndExams);
 
 router.get('/teachers', teachersController.getTeachers);
 
-router.get('/teachers/:id',teachersController.getTeacherById);
+router.get('/teachers/exams',teachersController.getTeachersExams);
 
 export default router;

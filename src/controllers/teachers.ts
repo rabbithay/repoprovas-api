@@ -7,8 +7,7 @@ export async function getTeachers(req: Request, res: Response) {
     return res.status(200).send(teachers)
 }
 
-export async function getTeacherById(req: Request, res: Response) {
-  const id = req.params.id
-  const teacher = await teachersService.getTeacherById(Number(id))
+export async function getTeachersExams(req: Request, res: Response) {
+  const teacher = await teachersService.getTeachersExams()
   return res.status(200).send(teacher);
 }

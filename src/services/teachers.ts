@@ -7,7 +7,7 @@ export async function getTeachers() {
 }
 
 
-export async function getTeacherById(teacherId: number){
-  const teacher = await getRepository(Teacher).find({ id: teacherId });
-  return teacher;
+export async function getTeachersExams(){
+  const subjects = await getRepository(Teacher).createQueryBuilder("teachers").innerJoinAndSelect("teachers.exams", "exams").innerJoinAndSelect("exams.subject", "subject").getMany() 
+  return subjects;
 }
