@@ -9,6 +9,6 @@ export default class Teacher {
   @Column()
   name: string;
 
-  @OneToMany(() => Exam, exam => exam.id)
+  @OneToMany(() => Exam, exam => exam.teacher)
   exams: Exam[];
 }
