@@ -26,6 +26,6 @@ export async function postExam(req: Request, res: Response) {
 }
 
 export async function getExams(req: Request, res: Response) {
-    const exams = await examsService.getExams()
+    const exams = await examsService.getExams()    
     return res.status(200).send(exams)
 }

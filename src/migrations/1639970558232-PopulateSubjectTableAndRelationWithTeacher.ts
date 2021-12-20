@@ -1,5 +1,8 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
+
+
+
 const subjects = [
     [
         "Cálculo I", 
@@ -44,7 +47,7 @@ function getRandomInt(min: number, max: number) {
   }
   
 
-export class PopulateSubjects1639947427023 implements MigrationInterface {
+  export class PopulateSubjectTableAndRelationWithTeacher1639970558232 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         const [resolveCourseId] = await queryRunner.query(`
             INSERT INTO courses
@@ -55,20 +58,20 @@ export class PopulateSubjects1639947427023 implements MigrationInterface {
 
         const courseId: number = resolveCourseId.id;
         
-        let subjectIdList: {id: number}[];
+        let subjectIdList: {id: number}[] = []
         for ( let i = 0 ; i < subjects.length ; i++ ) {
             const semesterSubjects = subjects[i];
             for ( let j = 0 ; j < semesterSubjects.length ; j ++) {
                 const subjectTitle = semesterSubjects[j]
-                subjectIdList = await queryRunner.query(`
-                INSERT INTO subjects
-                ("courseId", title, semester)
-                VALUES ($1, $2, $3)
-                RETURNING id
-            `, [courseId, subjectTitle, i+1]);
+                const [subjectId] = await queryRunner.query(`
+                    INSERT INTO subjects
+                    ("courseId", title, semester)
+                    VALUES ($1, $2, $3)
+                    RETURNING id
+                `, [courseId, subjectTitle, i+1]);
+                subjectIdList.push(subjectId);
             }
         }
-
         const teacherIdList: {id: number}[] = await queryRunner.query(`
             SELECT id FROM teachers;
         `)
@@ -76,14 +79,18 @@ export class PopulateSubjects1639947427023 implements MigrationInterface {
         for ( let i = 0 ; i < subjectIdList.length ; i++ ) {
             const subjectId = subjectIdList[i]?.id;
             const teacherQuantity = getRandomInt(1, 4)
+            const teacherPositions: any = {}
             for (let j = 0; j < teacherQuantity ; j++){                
-                const randomTeacherPosition = getRandomInt(0, teacherIdList.length - 1);
+                const randomTeacherPosition = getRandomInt(0, teacherIdList.length - 1);                
                 const teacherId = teacherIdList[randomTeacherPosition]?.id;
-                await queryRunner.query(`
+                if (!teacherPositions[randomTeacherPosition]) {
+                    await queryRunner.query(`
                     INSERT INTO teacher_subject
                     ("subjectId", "teacherId")
                     VALUES ($1, $2)
                 `, [subjectId, teacherId]);
+                }                
+                teacherPositions[randomTeacherPosition] = true;
             }
         }        
     }

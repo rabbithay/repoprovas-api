@@ -9,5 +9,6 @@ export async function getSubjects(req: Request, res: Response) {
 export async function getSubjectById(req: Request, res: Response) {
   const id = req.params.id
   const subject = await subjectsService.getSubjectById(Number(id))
+  console.log({subject})
   return res.status(200).send(subject);
 }
