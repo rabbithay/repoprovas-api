@@ -1,6 +1,6 @@
 import app, { init } from './app';
 
-const port = 4002;
+const port = process.env.NODE_ENV === 'dev' ? 4002 : process.env.PORT;
 
 init().then(() => {
   app.listen(port, () => {
