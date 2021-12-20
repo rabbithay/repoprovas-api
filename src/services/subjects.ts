@@ -7,3 +7,7 @@ export async function getSubjects() {
 }
 
 
+export async function getSubjectById(subjectId: number){
+  const subject = await getRepository(Subject).find({ id: subjectId });
+  return subject;
+}
