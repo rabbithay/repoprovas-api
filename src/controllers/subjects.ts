@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as subjectsService from '@/services/subjects'
+import * as subjectsService from '../services/subjects'
 
 export async function getSubjectsAndTeachers(req: Request, res: Response) {
   const subjects = await subjectsService.getSubjectsAndTeachers();

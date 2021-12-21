@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node ./dist/server.js",
-    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
+    "dev": "NODE_ENV=dev nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts",
     "build": "rm -rf ./dist && tsc -p tsconfig.json",
     "typeorm": "ts-node ./node_modules/typeorm/cli"
   },

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import * as subjectsController from '@/controllers/subjects'
-import * as examsController from '@/controllers/exams'
-import * as teachersController from '@/controllers/teachers'
+import * as subjectsController from '../controllers/subjects'
+import * as examsController from '../controllers/exams'
+import * as teachersController from '../controllers/teachers'
 
 const router = Router();
 

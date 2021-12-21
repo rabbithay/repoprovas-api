@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import * as examsService from '@/services/exams';
-import { validateObject } from '@/services/utils';
-import { newExamSchema } from '@/schemas/newExamSchema';
+import * as examsService from '../services/exams';
+import { validateObject } from '../services/utils';
+import { newExamSchema } from '../schemas/newExamSchema';
 
 
 export interface ExamCreate {
