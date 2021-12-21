@@ -1,5 +1,5 @@
 import { getRepository } from "typeorm";
-import Teacher from "@/entities/Teacher";
+import Teacher from "../entities/Teacher";
 
 export async function getTeachers() {
   const teachers = await getRepository(Teacher).find({relations:["exams"]});

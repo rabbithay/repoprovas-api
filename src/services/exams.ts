@@ -1,5 +1,5 @@
-import { ExamCreate } from "@/controllers/exams";
-import Exam from "@/entities/Exam";
+import { ExamCreate } from "../controllers/exams";
+import Exam from "../entities/Exam";
 import { getRepository } from "typeorm";;
 
 export async function createExam(exam: ExamCreate) {
